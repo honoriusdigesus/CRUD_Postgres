@@ -44,4 +44,16 @@ public class ConexionDB {
             System.out.printf("Error selecting data: "+e.getMessage());
         }
     }
+
+    //Actualizar datos en la tabla
+    public void updateDates(Connection connection, String nameTable, Integer di, String name, String lastName, Integer age, String email){
+        try {
+            String query = String.format("UPDATE %s SET di = '%s', name = '%s', lastname = '%s', age = '%s', email = '%s' WHERE di = '%s';", nameTable, di, name, lastName, age, email, di);
+            statement = connection.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Dates updated");
+        } catch (Exception e) {
+            System.out.printf("Error updating data: "+e.getMessage());
+        }
+    }
 }
