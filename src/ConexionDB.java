@@ -56,4 +56,30 @@ public class ConexionDB {
             System.out.printf("Error updating data: "+e.getMessage());
         }
     }
+
+    //Eliminar datos de la tabla
+    public void deleteDates(Connection connection, String nameTable, Integer di){
+        try {
+            String query = String.format("DELETE FROM %s WHERE di = '%s';", nameTable, di);
+            statement = connection.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Dates deleted");
+        } catch (Exception e) {
+            System.out.printf("Error deleting data: "+e.getMessage());
+        }
+    }
+
+    //Buscar por ID de la tabla
+    public void selectID(Connection connection, String nameTable, Integer di){
+        try {
+            String query = String.format("SELECT * FROM %s WHERE di = '%s';", nameTable, di);
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                System.out.println(rs.getString("di") + " " + rs.getString("name") + " " + rs.getString("lastname") + " " + rs.getString("age") + " " + rs.getString("email"));
+            }
+        } catch (Exception e) {
+            System.out.printf("Error selecting data: "+e.getMessage());
+        }
+    }
 }
